@@ -28,6 +28,11 @@ DEBUG = os.environ.get('DJANGO_DEBUD', '') != 'False'
 
 ALLOWED_HOSTS = ['*']
 
+# accounts settings
+
+AUTH_USER_MODEL = 'accounts.UserModel'
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
 
 # Application definition
 
@@ -40,6 +45,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_extensions',
     'debug_toolbar',
+
+    'accounts.apps.AccountsConfig',
+    'blog.apps.BlogConfig',
 ]
 
 MIDDLEWARE = [
