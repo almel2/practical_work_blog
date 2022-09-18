@@ -16,12 +16,12 @@ class Post(models.Model):
 
 
 class Comment(models.Model):
-    user_id = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, default='Anonimus')
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
     comment = models.TextField()
     post = models.ForeignKey('blog.Post', on_delete=models.CASCADE)
-    is_published = models.BooleanField()
+    is_published = models.BooleanField(default=False)
     create_date = models.DateTimeField(auto_now_add=True)
     update_date = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.comment[:10]
+        return self.comment

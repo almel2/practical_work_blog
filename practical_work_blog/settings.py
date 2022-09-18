@@ -28,6 +28,10 @@ DEBUG = os.environ.get('DJANGO_DEBUD', '') != 'False'
 
 ALLOWED_HOSTS = ['*']
 
+# email settings
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
 # accounts settings
 
 AUTH_USER_MODEL = 'accounts.UserModel'

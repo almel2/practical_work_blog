@@ -5,6 +5,30 @@
 {% endblock %}
 
 {% block content %}
-    <h1>profile</h1>
+    <h1>profile | <a href="{% url 'post_create' %}">Post create</a></h1>
+    <ul>
 
+        <h2>Author - {{ user.username }}
+            Email - {{ user.email }}</h2>
+
+        {% for post in user.post_set.all %}
+            <li>
+                {{ post.title }} <br>
+                {{ post.content }}<br>
+                <a href="{% url 'post_update' pk=post.id %}"> Update </a> <br><br>
+                {% for comment in post.comment_set.all %}
+                    {% if comment.is_published is True %}
+                        {% if comment.user_id is None %}
+                            user - Anonymous <br>
+                        {% else %}
+                            user - {{ comment.user_id }} <br>
+                        {% endif %}
+                        comment -- {{ comment.comment }}<br><br>
+                    {% endif %}
+                {% endfor %}
+            </li>
+        {% endfor %}
+
+
+    </ul>
 {% endblock %}

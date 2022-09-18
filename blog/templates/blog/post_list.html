@@ -8,11 +8,23 @@
     <h1>Posts</h1>
     <ul>
         {% for post in posts %}
-        <li>
-            {{ post.author }} <br>
-            {{ post.content }} <br><br>
-            {{ post.comment_set }}
-        </li>
+            <li>
+                {{ post.author }} <br>
+                {{ post.content }} <br><br>
+                <a href="{% url 'post_detail' pk=post.id %}"> Detail </a> <br>
+                <h5>Comments</h5>
+                {% for comment in post.comment_set.all %}
+                    {% if comment.is_published is True %}
+                        {% if comment.user_id is None %}
+                            user - Anonymous <br>
+                        {% else %}
+                            user - {{ comment.user_id }} <br>
+                        {% endif %}
+                        comment -- {{ comment.comment }}<br><br>
+                    {% endif %}
+                {% endfor %}
+                <a href="{% url 'comment_create' pk=post.id %}">Add comment</a> <br> <br>
+            </li>
         {% endfor %}
     </ul>
 {% endblock %}

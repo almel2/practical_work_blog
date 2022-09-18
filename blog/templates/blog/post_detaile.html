@@ -6,13 +6,8 @@
 
 {% block content %}
     <h1>Posts</h1>
-    <ul>
-        {% for post in posts %}
-        <li>
-            {{ post.author }} <br>
-            {{ post.content }} <br><br>
-            {{ post.comment_set }}
-        </li>
-        {% endfor %}
-    </ul>
+    <div>
+        {{ post.title }}, Author {{ post.user_set }}
+        <p>{{ post.content }}</p>
+    </div>
 {% endblock %}
