@@ -5,9 +5,15 @@ User = get_user_model()
 
 
 class Post(models.Model):
+    STATUS = [
+        ('DRA', 'Draft'),
+        ('PUB', 'Published'),
+    ]
+
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=200)
     content = models.TextField()
+    status = models.CharField(max_length=3, choices=STATUS, default='Draft')
     create_date = models.DateTimeField(auto_now_add=True)
     update_date = models.DateTimeField(auto_now=True)
 
@@ -16,7 +22,7 @@ class Post(models.Model):
 
 
 class Comment(models.Model):
-    user_id = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
+    author = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
     comment = models.TextField()
     post = models.ForeignKey('blog.Post', on_delete=models.CASCADE)
     is_published = models.BooleanField(default=False)

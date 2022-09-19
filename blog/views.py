@@ -25,7 +25,9 @@ class CommentCreate(CreateView):
         form.instance.post = post
         if self.request.user.is_authenticated:
             form.instance.user_id = self.request.user
-        send_mail('Blog info', f'Check a new comment {comment}', 'blog@gmail.com', ['admin@gmail.com'])
+        send_mail('Blog info', f'Check a new comment {comment}',
+                  'blog@gmail.com',
+                  ['admin@gmail.com'])
         return super(CommentCreate, self).form_valid(form)
 
 
@@ -33,7 +35,7 @@ class PostList(ListView):
     model = Post
     template_name = 'blog/post_list.html'
     context_object_name = 'posts'
-    queryset = Post.objects.all()
+    queryset = Post.objects.all().filter(status='PUB')
 
 
 class PostCreate(CreateView):
