@@ -1,11 +1,15 @@
 {% extends 'base.html' %}
 
+{% load static %}
+{% block css %}
+    <link rel="stylesheet" href="{% static 'blog/css/index.css' %}">
+{% endblock %}
+
 {% block title %}
     Registration
 {% endblock %}
 
 {% block content %}
-    <h1>Registration</h1>
     <form action="" method="post">
     {% csrf_token %}
     {{ form.as_p }}

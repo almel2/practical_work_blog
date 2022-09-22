@@ -24,7 +24,7 @@ class CommentCreate(CreateView):
         post = Post.objects.get(pk=int(self.kwargs['pk']))
         form.instance.post = post
         if self.request.user.is_authenticated:
-            form.instance.user_id = self.request.user
+            form.instance.author = self.request.user
         send_mail('Blog info', f'Check a new comment {comment}',
                   'blog@gmail.com',
                   ['admin@gmail.com'])
@@ -47,9 +47,9 @@ class PostCreate(CreateView):
         return reverse_lazy('profile_public', kwargs={'pk': self.request.user.id})
 
     def form_valid(self, form):
-        self.object = form.save(commit=False)
+        # self.object = form.save(commit=False)
         form.instance.author = self.request.user
-        send_mail('Blog info', f'Check a new comment post', 'blog@gmail.com', ['admin@gmail.com'])
+        send_mail('Blog info', 'Check a new comment post', 'blog@gmail.com', ['admin@gmail.com'])
         return super(PostCreate, self).form_valid(form)
 
 

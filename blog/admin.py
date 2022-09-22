@@ -11,7 +11,7 @@ class PostAdmin(admin.ModelAdmin):
 
 
 @admin.register(Comment)
-class PostAdmin(admin.ModelAdmin):
+class CommentAdmin(admin.ModelAdmin):
     fields = ('author', 'comment', 'post', 'is_published', 'create_date', 'update_date')
     readonly_fields = ('author', 'post', 'create_date', 'update_date')
     empty_value_display = 'Anonymous'

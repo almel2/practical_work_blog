@@ -1,11 +1,15 @@
 {% extends 'base.html' %}
 
+{% load static %}
+{% block css %}
+    <link rel="stylesheet" href="{% static 'blog/css/index.css' %}">
+{% endblock %}
+
 {% block title %}
     Posts
 {% endblock %}
 
 {% block content %}
-    <h1>Posts</h1>
     <div>
         {{ post.title }}, Author {{ post.user_set }}
         <p>{{ post.content }}</p>

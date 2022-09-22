@@ -1,9 +1,117 @@
-{% extends 'base.html' %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-{% block title %}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
 
-{% endblock %}
+    {% load static %}
+    {% block css %}
+        <link rel="stylesheet" href="{% static 'blog/css/index.css' %}">
+    {% endblock %}
 
-{% block content %}
-<h1>Index page</h1>
-{% endblock %}
+    <title>Document</title>
+</head>
+<body>
+
+
+<header>
+    <div class="container-md">
+        <div class="row">
+            <div class="col-md-6 text-white">
+                <div class="logo">
+                    <h3 class="display-4">Blog <small>
+                        <mark class="">&</mark>
+                        comments</small></h3>
+                </div>
+            </div>
+            <div class="col-md-6 text-end text-white p-4">
+                <div class="registration ">
+                    {% if user.is_authenticated %}
+                        {{ user.username }} /
+                        <a href="{% url 'logout' %}" class="text-decoration-none text-white">Logout</a>
+                    {% else %}
+                        <a href="{% url 'register' %}" class="text-decoration-none text-white">Register</a> /
+                        <a href="{% url 'login' %}" class="text-decoration-none text-white">Login</a>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md text-end text-white">
+                    <div class="settings">
+                        <div class="nav-item dropdown ">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                               aria-expanded="false">
+                                Settings
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-md-end text-end">
+                                {% if user.is_authenticated %}
+                                    <li><a class="dropdown-item" href="{% url 'profile_public' pk=user.id %}"
+                                    >Profile</a>
+                                    </li>
+                                {% endif %}
+                                <li><a class="dropdown-item" href="/admin">Adminka</a></li>
+                                <li><a class="dropdown-item" href="#">About us</a></li>
+                                <li><a class="dropdown-item" href="#">Contack form</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</header>
+
+
+<section>
+    <div class="container overflow-hidden">
+        <div class="row gx-3">
+            <div class="col-md-2">
+                <div class="navigations border-end border-2 border-primary">
+                    <h2 class="display-5 ">Navi bar</h2>
+                    <div class="navi_bar">
+                        <nav class="nav flex-column">
+                            <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Home</a>
+                            <a class="nav-link" href="{% url 'post_list' %}">Post list</a>
+                            <a class="nav-link" href="{% url 'user_posts' %}">User posts</a>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-10">
+                <div class="content">
+                    <div class="card">
+                        <h5 class="card-header">Author</h5>
+                        <div class="card-body">
+                            <h5 class="card-title">titile</h5>
+                            <p class="card-text">С вспомогательным текстом ниже в качестве естественного перехода к
+                                дополнительному контенту.</p>
+                            <a href="#" class="btn btn-primary">Comments</a>
+                            <a href="#" class="btn btn-primary">Comments</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+    </div>
+    </div>
+    </div>
+</section>
+
+<footer class="mt-5 p-3 bg-info">
+    footer
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
+        crossorigin="anonymous"></script>
+</body>
+</html>
