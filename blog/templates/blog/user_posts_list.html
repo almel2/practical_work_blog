@@ -10,13 +10,10 @@
 {% endblock %}
 
 {% block content %}
+    {% for user in users %}
+        User -- {{ user.username }} have
+        {{ user.post_set.all.count }} posts<br><br>
+    {% endfor %}
 
-    <ul>
-        {% for user in users %}
-            <li>
-                {{ user.first_name }}<br>
-                {{ user.post_set }}
-            </li>
-        {% endfor %}
-    </ul>
+    {{ agg.post__count }}
 {% endblock %}

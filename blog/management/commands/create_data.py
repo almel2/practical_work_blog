@@ -1,7 +1,7 @@
 from django.contrib.auth import get_user_model
 from django.core.management import BaseCommand
 from faker import Faker
-from random import randint, choice
+from random import choice
 from blog.models import Post, Comment
 
 User = get_user_model()
@@ -14,6 +14,7 @@ Aenean faucibus diam eu venenatis pharetra. In hac habitasse platea dictumst. Ph
 Maecenas facilisis purus vitae dolor eleifend, ut ultrices velit pulvinar. Nullam elementum tortor nec urna scelerisque, vel scelerisque nisi faucibus. Pellentesque eleifend metus leo, id dapibus ipsum ullamcorper quis. Quisque iaculis nisl metus, ut lobortis sapien hendrerit non. Maecenas iaculis finibus nibh fringilla sodales. Nunc quis aliquet odio. Maecenas ut congue nisl. Aenean dignissim magna sem. Vivamus nec magna pulvinar, sodales sapien vel, facilisis turpis. Donec porta quis lectus vel placerat. Integer vel gravida ante. Nulla id scelerisque ipsum, id auctor ipsum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Nulla facilisi.'''
 com = ['Good post!', 'Not bad', 'Cool!!', 'I did not like', 'poorly']
 
+
 class Command(BaseCommand):
     help = 'This command create data, has one argument "count_data"'
 
@@ -24,7 +25,6 @@ class Command(BaseCommand):
         fake = Faker()
         num = options['count_data']
 
-
         for _ in range(10):
             user = User.objects.create_user(username=fake.name(), email=fake.email(), password=password)
             user.is_superuser = False
@@ -33,11 +33,12 @@ class Command(BaseCommand):
         authors_id = User.objects.values_list('id', flat=True)
 
         list_obj_post = []
-        for i in range(1, num+1):
+        for i in range(1, num + 1):
             post = Post(
                 author_id=choice(authors_id),
                 title=f'Post{i}',
                 content=text,
+                status='PUB'
             )
             list_obj_post.append(post)
         Post.objects.bulk_create(list_obj_post)

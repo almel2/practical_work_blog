@@ -5,25 +5,41 @@
 {% endblock %}
 
 {% block content %}
-    <ul>
+    <div class="content">
+
         {% for post in posts %}
-            <li>
-                {{ post.author }} <br>
-                {{ post.content }} <br><br>
-                <a href="{% url 'post_detail' pk=post.id %}"> Detail </a> <br>
-                <h5>Comments</h5>
-                {% for comment in post.comment_set.all %}
-                    {% if comment.is_published is True %}
-                        {% if comment.user_id is None %}
-                            user - Anonymous <br>
-                        {% else %}
-                            user - {{ comment.user_id }} <br>
-                        {% endif %}
-                        comment -- {{ comment.comment }}<br><br>
-                    {% endif %}
-                {% endfor %}
-                <a href="{% url 'comment_create' pk=post.id %}">Add comment</a> <br> <br>
-            </li>
+            <div class="card mb-2">
+                <h5 class="card-header">{{ post.author }}</h5>
+                <div class="card-body">
+                    <h5 class="card-title">{{ post.title }}</h5>
+                    <p class="card-text">{{ post.content }}</p>
+                    <p>
+                        <a class="btn btn-color text-white" data-bs-toggle="collapse" href="#Post{{ post.id }}"
+                           role="button"
+                           aria-expanded="false" aria-controls="collapseExample">
+                            Comments
+                        </a>
+                        <a class="btn btn-color text-white" href="{% url 'comment_create' pk=post.id %}">Add comment</a>
+                    </p>
+                    <div class="collapse" id="Post{{ post.id }}">
+
+                        {% for comment in post.comment_set.all %}
+                            <div class="card mb-2">
+                                {% if comment.is_published is True %}
+                                    {% if comment.author is None %}
+                                        <h5 class="card-header">Anonymous</h5>
+                                    {% else %}
+                                        <h5 class="card-header">{{ comment.author }}</h5>
+                                    {% endif %}
+                                    <div class="card-body">
+                                        <p class="card-title">{{ comment.comment }}</p>
+                                    </div>
+                                {% endif %}
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
         {% endfor %}
-    </ul>
+    </div>
 {% endblock %}

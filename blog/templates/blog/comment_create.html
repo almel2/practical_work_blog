@@ -10,10 +10,24 @@
 {% endblock %}
 
 {% block content %}
-    <h1>Post create</h1>
-    <form action="" method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit"> publish </button>
-    </form>
+    <div class="row">
+        <div class="col-md">
+            <form action="" method="post">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label for="id_comment" class="form-label">Comment</label>
+                    <textarea class="form-control" name="comment" id="id_comment" placeholder="write your comment"
+                    rows="5"></textarea>
+                </div>
+                <button type="submit" class="btn btn-color text-white">Add comment</button>
+            </form>
+        </div>
+    </div>
+
+{#    <h1>Post create</h1>#}
+{#    <form action="" method="post">#}
+{#        {% csrf_token %}#}
+{#        {{ form.as_p }}#}
+{#        <button type="submit"> publish</button>#}
+{#    </form>#}
 {% endblock %}

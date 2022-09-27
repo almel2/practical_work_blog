@@ -1,5 +1,5 @@
 [flake8]
 
-exclude = .git,__pycache__,venv,.idea,migrations,tests.py
+exclude = .git,__pycache__,venv,.idea,migrations,tests.py,create_data.py
 
 max-line-length = 160

@@ -12,8 +12,8 @@
     {% load static %}
     <link rel="stylesheet" href="{% static 'blog/css/index.css' %}">
 
-</head>
-<body>
+</head >
+<body class="d-flex flex-column min-vh-100">
 
 <header>
     <div class="container-md">
@@ -68,30 +68,48 @@
         <div class="row gx-3">
             <div class="col-md-2">
                 <div class="navigations border-end border-2 border-primary">
-                    <h2 class="display-5 ">Navi bar</h2>
+                    <h1>Navi bar</h1>
                     <div class="navi_bar">
                         <nav class="nav flex-column">
-                            <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Home</a>
-                            <a class="nav-link" href="{% url 'post_list' %}">Post list</a>
-                            <a class="nav-link" href="{% url 'user_posts' %}">User posts</a>
+                            <a class="nav-link active link-color" aria-current="page" href="{% url 'home' %}">Home</a>
+                            <a class="nav-link link-color" href="{% url 'post_list' %}">Post list</a>
+                            <a class="nav-link link-color" href="{% url 'user_posts' %}">User posts</a>
                         </nav>
                     </div>
                 </div>
             </div>
             <div class="col-md-10">
-                <div class="content border text-center">
-                    Content
+                <div class="content">
                     {% block content %} {% endblock %}
                 </div>
-
             </div>
         </div>
-
+        <div class="row-md">
+            <nav aria-label="Page navigation example">
+                <ul class="pagination justify-content-center">
+                    {% if page_obj.has_previous %}
+                        <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+                        </li>
+                    {% endif %}
+                    {% for p in paginator.page_range %}
+                        {% if p == page_obj.number %}
+                            <li class="page-item active"><a class="page-link" href="?page={{ p }}">{{ p }}</a></li>
+                        {% else %}
+                            <li class="page-item"><a class="page-link" href="?page={{ p }}">{{ p }}</a></li>
+                        {% endif %}
+                    {% endfor %}
+                    {% if page_obj.has_next %}
+                        <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </div>
     </div>
-
 </section>
 
-<footer class="mt-5 p-3 ">
+
+<footer class="p-3 mt-auto">
     footer
 </footer>
 

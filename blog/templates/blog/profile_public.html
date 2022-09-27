@@ -10,30 +10,60 @@
 {% endblock %}
 
 {% block content %}
-    <h1>profile | <a href="{% url 'post_create' %}">Post create</a></h1>
-    <ul>
+    <h1>Profile | <a class="btn btn-color text-white" href="{% url 'post_create' %}"> Create post</a></h1>
+    <div class="row mt-5">
+        <div class="col-md">
+            <h2 class="header">
+                Author - {{ user.username }}<br>
+                Email - {{ user.email }}
+            </h2>
+        </div>
+    </div>
 
-        <h2>Author - {{ user.username }}
-            Email - {{ user.email }}</h2>
+    <div class="row mt-5">
+        <div class="col-md">
+            <div class="content">
+                {% for post in user.post_set.all %}
+                    <div class="card mb-2">
+                        <h5 class="card-header">{{ post.author }}</h5>
+                        <div class="card-body">
+                            <h5 class="card-title">{{ post.title }}</h5>
+                            <p class="card-text">{{ post.content }}</p>
+                            <p>
+                                <a class="btn btn-color text-white" data-bs-toggle="collapse" href="#Post{{ post.id }}"
+                                   role="button"
+                                   aria-expanded="false" aria-controls="collapseExample">
+                                    Comments
+                                </a>
+                                <a class="btn btn-color text-white" href="{% url 'comment_create' pk=post.id %}">Add
+                                    comment</a>
+                                <span class="update_btn text-end">
+                                <a class="btn btn-color text-white" href="{% url 'post_update' pk=post.id %}">Update
+                                    post</a>
+                                </span>
+                            </p>
+                            <div class="collapse" id="Post{{ post.id }}">
 
-        {% for post in user.post_set.all %}
-            <li>
-                {{ post.title }} <br>
-                {{ post.content }}<br>
-                <a href="{% url 'post_update' pk=post.id %}"> Update </a> <br><br>
-                {% for comment in post.comment_set.all %}
-                    {% if comment.is_published is True %}
-                        {% if comment.user_id is None %}
-                            user - Anonymous <br>
-                        {% else %}
-                            user - {{ comment.user_id }} <br>
-                        {% endif %}
-                        comment -- {{ comment.comment }}<br><br>
-                    {% endif %}
+                                {% for comment in post.comment_set.all %}
+                                    <div class="card mb-2">
+                                        {% if comment.is_published is True %}
+                                            {% if comment.author is None %}
+                                                <h5 class="card-header">Anonymous</h5>
+                                            {% else %}
+                                                <h5 class="card-header">{{ comment.author }}</h5>
+                                            {% endif %}
+                                            <div class="card-body">
+                                                <p class="card-title">{{ comment.comment }}</p>
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
                 {% endfor %}
-            </li>
-        {% endfor %}
 
-
-    </ul>
+            </div>
+        </div>
+    </div>
 {% endblock %}

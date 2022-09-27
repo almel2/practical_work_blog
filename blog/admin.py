@@ -24,6 +24,6 @@ class CommentAdmin(admin.ModelAdmin):
                       f'''{obj.author} you have a new comment in post {obj.post.title},
                         link http://127.0.0.1:8000/post/{obj.post.id}/''',
                       'blog@gmail.com',
-                      [obj.user_id.email, ]
+                      [obj.author.email, ]
                       )
         super().save_model(request, obj, form, change)

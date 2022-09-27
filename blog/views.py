@@ -3,6 +3,7 @@ from django.core.mail import send_mail
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView
+
 from blog.models import Post, Comment
 from blog.forms import PostForm, CommentForm
 
@@ -35,7 +36,8 @@ class PostList(ListView):
     model = Post
     template_name = 'blog/post_list.html'
     context_object_name = 'posts'
-    queryset = Post.objects.all().filter(status='PUB')
+    queryset = Post.objects.select_related('author').prefetch_related('comment_set__author').filter(status='PUB')
+    paginate_by = 2
 
 
 class PostCreate(CreateView):
@@ -71,7 +73,7 @@ class PostDetail(DetailView):
 
 class UserPostList(ListView):
     model = User
-    queryset = User.objects.all()
+    queryset = User.objects.prefetch_related('post_set')
     template_name = 'blog/user_posts_list.html'
     context_object_name = 'users'
 

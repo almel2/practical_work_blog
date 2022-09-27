@@ -1,117 +1,55 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+{% extends 'base.html' %}
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+{% load static %}
 
-    {% load static %}
-    {% block css %}
-        <link rel="stylesheet" href="{% static 'blog/css/index.css' %}">
-    {% endblock %}
+{% block title %}
+    Index
+{% endblock %}
 
-    <title>Document</title>
-</head>
-<body>
-
-
-<header>
-    <div class="container-md">
+{% block content %}
+    <div class="container">
         <div class="row">
-            <div class="col-md-6 text-white">
-                <div class="logo">
-                    <h3 class="display-4">Blog <small>
-                        <mark class="">&</mark>
-                        comments</small></h3>
-                </div>
+            <div class="col-md">
+                <h1 class="display-3">Home page</h1>
             </div>
-            <div class="col-md-6 text-end text-white p-4">
-                <div class="registration ">
-                    {% if user.is_authenticated %}
-                        {{ user.username }} /
-                        <a href="{% url 'logout' %}" class="text-decoration-none text-white">Logout</a>
-                    {% else %}
-                        <a href="{% url 'register' %}" class="text-decoration-none text-white">Register</a> /
-                        <a href="{% url 'login' %}" class="text-decoration-none text-white">Login</a>
-                    {% endif %}
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md text-end text-white">
-                    <div class="settings">
-                        <div class="nav-item dropdown ">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                               aria-expanded="false">
-                                Settings
-                            </a>
-                            <ul class="dropdown-menu dropdown-menu-md-end text-end">
-                                {% if user.is_authenticated %}
-                                    <li><a class="dropdown-item" href="{% url 'profile_public' pk=user.id %}"
-                                    >Profile</a>
-                                    </li>
-                                {% endif %}
-                                <li><a class="dropdown-item" href="/admin">Adminka</a></li>
-                                <li><a class="dropdown-item" href="#">About us</a></li>
-                                <li><a class="dropdown-item" href="#">Contack form</a></li>
-                            </ul>
+        </div>
+        <div class="row">
+            <div class="col-md">
+                <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-indicators">
+                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0"
+                                class="active" aria-current="true" aria-label="Slide 1"></button>
+                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
+                                aria-label="Slide 2"></button>
+                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
+                                aria-label="Slide 3"></button>
+                    </div>
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img src="{% static 'blog/img/Blog-Comments.jpg' %}" class="d-block w-100 img" alt="...">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="{% static 'blog/img/want48167-1QDZGC1487814769.jpg' %}" class="d-block w-100 img"
+                                 alt="...">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="{% static 'blog/img/Maximize-Your-Traffic-and-Branding-with-Blog-Commenting.jpg' %}"
+                                 class="d-block w-100 img" alt="...">
                         </div>
                     </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+                            data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Предыдущий</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+                            data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Следующий</span>
+                    </button>
                 </div>
             </div>
         </div>
     </div>
-    </div>
-</header>
 
-
-<section>
-    <div class="container overflow-hidden">
-        <div class="row gx-3">
-            <div class="col-md-2">
-                <div class="navigations border-end border-2 border-primary">
-                    <h2 class="display-5 ">Navi bar</h2>
-                    <div class="navi_bar">
-                        <nav class="nav flex-column">
-                            <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Home</a>
-                            <a class="nav-link" href="{% url 'post_list' %}">Post list</a>
-                            <a class="nav-link" href="{% url 'user_posts' %}">User posts</a>
-                        </nav>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-10">
-                <div class="content">
-                    <div class="card">
-                        <h5 class="card-header">Author</h5>
-                        <div class="card-body">
-                            <h5 class="card-title">titile</h5>
-                            <p class="card-text">С вспомогательным текстом ниже в качестве естественного перехода к
-                                дополнительному контенту.</p>
-                            <a href="#" class="btn btn-primary">Comments</a>
-                            <a href="#" class="btn btn-primary">Comments</a>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-
-    </div>
-    </div>
-    </div>
-    </div>
-</section>
-
-<footer class="mt-5 p-3 bg-info">
-    footer
-</footer>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
-        crossorigin="anonymous"></script>
-</body>
-</html>
+{% endblock %}

@@ -5,10 +5,28 @@
 {% endblock %}
 
 {% block content %}
-    <h1>Post create</h1>
     <form action="" method="post">
         {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit"> Create </button>
+        <div class="mb-3">
+            <label for="id_title" class="form-label">Title</label>
+            <input id="id_title" type="text" class="form-control" name="title" >
+
+            <label for="id_content" class="form-label">Post</label>
+            <textarea class="form-control" id="id_content" cols="30" rows="10" name="content"></textarea>
+
+            <label for="id_status" class="form-label">Status</label>
+            <select class="form-select" id="id_status" name="status">
+                <option value="DRA" selected>Draft</option>
+                <option value="PUB">Pablished</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-color">Create</button>
     </form>
+
+{#    <h1>Post create</h1>#}
+{#    <form action="" method="post">#}
+{#        {% csrf_token %}#}
+{#        {{ form.as_p }}#}
+{#        <button type="submit"> Create </button>#}
+{#    </form>#}
 {% endblock %}

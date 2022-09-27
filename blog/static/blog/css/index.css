@@ -13,3 +13,53 @@ header, footer {
 .border-primary, .my_color {
     border-color: var(--color1) !important;
 }
+.btn-color {
+    background-color: var(--color1) !important;
+}
+
+.link-color {
+    color: var(--color1)
+}
+
+.pagination > li > a {
+    background-color: white;
+    color: var(--color1);
+}
+
+.pagination > .active > a
+{
+    color: white;
+    background-color: var(--color1) !Important;
+    border: solid 1px var(--color1) !Important;
+}
+
+/*.pagination > .active > a:hover*/
+/*{*/
+/*    background-color: #5A4181 !Important;*/
+/*    border: solid 1px #5A4181;*/
+/*}*/
+
+.pagination > li > a:focus,
+.pagination > li > a:hover,
+.pagination > li > span:focus,
+.pagination > li > span:hover
+{
+    color: white;
+    background-color: #eee;
+    border-color: #ddd;
+}
+
+.carousel-item {
+  height: 500px;
+}
+/*.img {*/
+/*    position: absolute;*/
+/*    object-fit: cover;*/
+/*    top: 0;*/
+/*    left: 0;*/
+/*    min-height: 500px !important;*/
+/*}*/
+
+.img {
+    height: 500px;
+}

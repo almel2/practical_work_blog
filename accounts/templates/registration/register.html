@@ -10,10 +10,49 @@
 {% endblock %}
 
 {% block content %}
-    <form action="" method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Registration</button>
-    </form>
+    <div class="col-md">
+        <form action="" method="post" class="requires-validation" novalidate>
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="id_username" class="form-lable">Username</label>
+                <input type="text" class="form-control " name="username" id="id_username" required>
 
+                <label for="id_email" class="form-lable">Email</label>
+                <input type="email" class="form-control " name="email" id="id_email" required>
+
+                <label for="id_password1" class="form-lable">Password</label>
+                <input type="password" class="form-control" name="password1" id="id_password1" required>
+                <ul>
+                    <li>Your password can’t be too similar to your other personal information.</li>
+                    <li>Your password must contain at least 8 characters.</li>
+                    <li>Your password can’t be a commonly used password.</li>
+                    <li>Your password can’t be entirely numeric.</li>
+                </ul>
+                <label for="id_password2" class="form-lable">Password confirmation</label>
+                <input type="password" class="form-control" name="password2" id="id_password2" required>
+
+            </div>
+            <button type="submit" class="btn btn-color text-white mb-4">Ragistration</button>
+        </form>
+    </div>
+    <div class="col-md text-end">
+        <a href="{% url 'password_reset' %}">Password reset</a>
+    </div>
+    <script>
+        (function () {
+            'use strict'
+            const forms = document.querySelectorAll('.requires-validation')
+            Array.from(forms)
+                .forEach(function (form) {
+                    form.addEventListener('submit', function (event) {
+                        if (!form.checkValidity()) {
+                            event.preventDefault()
+                            event.stopPropagation()
+                        }
+
+                        form.classList.add('was-validated')
+                    }, false)
+                })
+        })()
+    </script>
 {% endblock %}
